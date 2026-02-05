@@ -63,7 +63,8 @@
 </head>
 <body>
 
-  <audio id="music" src="everything_is_romantic.mp3"></audio>
+  <!-- Music -->
+  <audio id="music" src="everything_is_romantic.mp3" preload="auto" loop></audio>
 
   <div class="card">
     <h1>Happy Valentine’s Day Achuuu 🥹💗</h1>
@@ -73,9 +74,19 @@ Happy Valentine's day achuuu 🥹😘, so enich ente first valentine's day ahh e
   </div>
 
   <script>
-    document.body.addEventListener('click', () => {
-      document.getElementById('music').play();
-    });
+    const music = document.getElementById('music');
+    let played = false;
+
+    function startMusic() {
+      if (!played) {
+        music.play().catch(() => {});
+        played = true;
+      }
+    }
+
+    document.addEventListener('click', startMusic);
+    document.addEventListener('touchstart', startMusic);
+    document.addEventListener('keydown', startMusic);
 
     setInterval(() => {
       const heart = document.createElement('div');
